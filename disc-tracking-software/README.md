@@ -1,8 +1,23 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+        ESOF 423 | Project Documentation
 
-## Getting Started
+__________________________________________________
+//docs inbound
 
-First, run the development server:
+
+                  Tech Stack
+__________________________________________________
+
+* Frontend | Next.js, TailwindCSS
+* Backend & DB | Go, PostgreSQL {tbd}, C
+* Auth/Proxy | NextAuth.js
+* Hardware | Antenna integrated GPS module SKM52, XIAO RP2040, Disc Golf Driver
+
+
+                Getting Started
+__________________________________________________
+
+
+To run development server:
 
 ```bash
 npm run dev
