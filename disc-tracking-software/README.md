@@ -4,7 +4,7 @@ __________________________________________________
 //docs inbound
 
 
-                  Tech Stack
+        Tech Stack
 __________________________________________________
 
 * Frontend | Next.js, TailwindCSS
@@ -12,8 +12,7 @@ __________________________________________________
 * Auth/Proxy | NextAuth.js
 * Hardware | Antenna integrated GPS module SKM52, XIAO RP2040, Disc Golf Driver
 
-
-                Getting Started
+        Getting Started
 __________________________________________________
 
 
