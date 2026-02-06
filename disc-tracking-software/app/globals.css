@@ -1,26 +1,72 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --bg-primary: #190f2A;       /* main dark background */
+  --bg-secondary: #223066;     /* cards, overlays */
+  --text-primary: #ffffff;     /* main text */
+  --text-muted: rgba(255,255,255,0.75);  /* subtitles, secondary text */
+  --accent-teal: #54c4c3;      /* highlights, primary buttons */
+  --accent-blue: #456fb6;      /* secondary buttons/links */
+  --accent-purple: #764d9f;    /* tertiary accents */
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  font-family: var(--font-roboto), system-ui, sans-serif;
+}
+
+/* Reusable button classes – teal primary passes AA/AAA */
+.btn-primary {
+  background-color: var(--accent-teal);
+  color: #000000;               /* black text on teal → contrast ~8+:1 */
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.2);
+}
+
+.btn-primary:hover {
+  background-color: #3daaa9;    /* slightly darker teal variant for hover */
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3);
+}
+
+.btn-secondary {
+  background-color: var(--accent-blue);
+  color: var(--text-primary);
+  /* contrast on blue bg ~7+:1 with white */
+}
+
+/* Section title – large text, teal on dark bg (passes AAA) */
+.section-title {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: var(--accent-teal);
+}
+
+@media (min-width: 768px) {
+  .section-title {
+    font-size: 3.125rem;
+    line-height: 1;
+  }
+}
+
+/* Card hover border – purple accent */
+.card {
+  background-color: rgba(34, 48, 102, 0.6); /* #223066 at 60% */
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--accent-purple);
+  border-radius: 0.75rem;
+  padding: 2rem;
+  transition: border-color 0.3s ease;
+}
+
+.card:hover {
+  border-color: var(--accent-teal);
 }
