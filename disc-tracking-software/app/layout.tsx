@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
+import { Inter } from "next/font/google";  // ← Change here
 import "./globals.css";
 
-const roboto = Roboto({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
-  variable: "--font-roboto",
+  variable: "--font-inter",      // We'll use this CSS variable
+  display: "swap",               // Good FOUT/FOIT handling
+  // Optional: If you want specific weights only (Inter is variable by default)
+  // weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -19,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${roboto.variable} font-sans`}>
+    <html lang="en" className={`${inter.variable} font-sans`}>
       <body className="antialiased">
         {children}
       </body>
