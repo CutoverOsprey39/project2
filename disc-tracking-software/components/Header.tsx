@@ -38,8 +38,9 @@ export default function Header() {
             <Link href="/sign-in" className="text-sm font-medium text-white/90 hover:text-[#54c4c3] transition-colors">
               Log in
             </Link>
+
             <Link
-              href="/create-account"
+              href="/sign-up"
               className="bg-[#54c4c3] text-black px-5 py-2.5 rounded-full text-sm font-medium hover:bg-[#3daaa9] transition-colors shadow-md"
             >
               Get Started
@@ -115,6 +116,7 @@ export default function Header() {
             <Link href="/sign-in" className="text-white/90 hover:text-[#54c4c3] transition-colors py-2" onClick={closeMenu}>
               Log in
             </Link>
+
             <Link
               href="/sign-up"
               className="mt-5 bg-[#54c4c3] text-black px-6 py-4 rounded-full text-center font-semibold hover:bg-[#3daaa9] transition-colors shadow-md"

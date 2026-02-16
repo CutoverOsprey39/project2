@@ -36,7 +36,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight mb-6 text-white">
             Track Every Throw.<br />
-            Master Your <span className="text-[#54c4c3]">Bag</span>.
+            Optimize Your <span className="text-[#54c4c3]">Game</span>.
           </h1>
 
           <p className="text-lg sm:text-xl md:text-2xl text-white/80 max-w-3xl mx-auto mb-10">
@@ -107,8 +107,9 @@ function InteractiveCTA() {
       <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-[#54c4c3] relative z-10">
         Ready to level up your disc golf game?
       </h2>
+      {/*change to create-account later!*/}
       <Link
-        href="/create-account"
+        href="/dashboard"
         className="relative z-10 inline-block bg-[#54c4c3] text-black font-medium text-xl py-4 px-10 rounded-lg transition hover:bg-[#3daaa9] shadow-lg hover:shadow-xl"
       >
         Start Tracking Today
