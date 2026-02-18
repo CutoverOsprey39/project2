@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";  // ← Change here
 import "./globals.css";
+import { Toaster } from "sonner";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -24,6 +25,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} font-sans`}>
       <body className="antialiased">
         {children}
+        <Toaster richColors position="top-center" />
       </body>
     </html>
   );

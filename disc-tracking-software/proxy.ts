@@ -1,17 +1,30 @@
-import { auth } from "./auth"
+import NextAuth from "next-auth"
+import { NextResponse } from "next/server"
+import { authConfig } from "./auth.config"
+
+const { auth } = NextAuth(authConfig)
 
 export default auth((req) => {
-  // If the user is NOT logged in and is trying to access /dashboard or deeper
-  const isDashboard = req.nextUrl.pathname.startsWith("/dashboard") || 
-                      req.nextUrl.pathname.startsWith("/tracker")
+  const { nextUrl } = req
+  const isLoggedIn = !!req.auth
   
-  if (isDashboard && !req.auth) {
-    const newUrl = new URL("/sign-in", req.nextUrl.origin)
-    return Response.redirect(newUrl)
+  const isTrackerRoute = nextUrl.pathname.startsWith('/dashboard')
+  const isAuthRoute = nextUrl.pathname.startsWith('/sign-in') || nextUrl.pathname.startsWith('/create-account')
+
+  // Redirect to tracker if logged in and trying to access auth routes or home page
+  if (isLoggedIn && (isAuthRoute || nextUrl.pathname === '/')) {
+    return NextResponse.redirect(new URL('/dashboard', nextUrl))
   }
+
+  // Redirect to sign-in if accessing tracker route while not logged in
+  if (!isLoggedIn && isTrackerRoute) {
+    return NextResponse.redirect(new URL('/sign-in', nextUrl))
+  }
+
+  return NextResponse.next()
 })
 
 export const config = {
-  // Matcher ignoring static files and api
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
 }
+

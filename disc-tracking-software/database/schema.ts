@@ -1,5 +1,4 @@
 import { uuid, varchar, pgTable, text, timestamp, pgEnum, date, boolean, jsonb, index, serial, integer } from 'drizzle-orm/pg-core';
-import { sql } from 'drizzle-orm';
 
 //Main entry-point for defining database schema using Drizzle ORM with PostgreSQL
 //Schema definitions for users, disc, stats
@@ -28,7 +27,7 @@ import { sql } from 'drizzle-orm';
 
 export const usersTable = pgTable('users_table', 
 {
-  id: uuid('id').notNull().primaryKey().defaultRandom().unique(),
+  id: uuid('id').primaryKey().defaultRandom(),
   full_name: varchar('full_name', {length: 255}).notNull(),
   email: text('email').notNull().unique(),
   phone: varchar('phone', {length: 20}).notNull().default(''),
