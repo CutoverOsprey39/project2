@@ -90,7 +90,7 @@ export default function Home() {
           <FeatureCard
             title="Disc Tracking"
             description="Find your discs with ease — track your lost discs."
-            imageSrc="/spyglass.svg"
+            imageSrc="/Spyglass.svg"
           />
         </div>
       </section>

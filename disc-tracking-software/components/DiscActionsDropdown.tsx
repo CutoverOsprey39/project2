@@ -1,7 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts';
 
 type Disc = {
   id: string;
@@ -25,6 +34,12 @@ export default function DiscActionsDropdown({
   const [trackingNumber, setTrackingNumber] = useState('');
   const [showDiscList, setShowDiscList] = useState(false);
 
+  // Stopwatch + results
+  const [isRunning, setIsRunning] = useState(false);
+  const [elapsedTime, setElapsedTime] = useState(0); // in seconds
+  const [showThrowResults, setShowThrowResults] = useState(false);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+
   const toggleDropdown = () => setIsOpen(!isOpen);
   const closeDropdown = () => {
     setIsOpen(false);
@@ -37,7 +52,7 @@ export default function DiscActionsDropdown({
     setSelectedDisc(disc);
     setSyncStatus('idle');
     setTrackerDistance(null);
-    setShowDiscList(false); // Close disc list
+    setShowDiscList(false);
   };
 
   const handleSync = () => {
@@ -45,7 +60,7 @@ export default function DiscActionsDropdown({
     // TODO: Replace with real device connection + distance reading
     setSyncStatus('success');
     setTrackerDistance(285);
-    closeDropdown(); // Close after sync
+    closeDropdown();
   };
 
   const handleRemoveDisc = () => {
@@ -87,12 +102,77 @@ export default function DiscActionsDropdown({
     setShowAddPopup(false);
   };
 
+  // Stopwatch controls
+  const startStopwatch = () => {
+    if (!isRunning) {
+      setIsRunning(true);
+      const start = Date.now() - elapsedTime * 1000;
+      timerRef.current = setInterval(() => {
+        setElapsedTime((Date.now() - start) / 1000);
+      }, 100);
+    }
+  };
+
+  const stopStopwatch = () => {
+    if (isRunning) {
+      setIsRunning(false);
+      if (timerRef.current) clearInterval(timerRef.current);
+      // Show results only if we have valid distance & time
+      if (trackerDistance && trackerDistance > 0 && elapsedTime > 0.5) {
+        setShowThrowResults(true);
+      }
+    }
+  };
+
+  const resetStopwatch = () => {
+    setIsRunning(false);
+    if (timerRef.current) clearInterval(timerRef.current);
+    setElapsedTime(0);
+    setShowThrowResults(false);
+  };
+
+  // Cleanup timer on unmount
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, []);
+
   const buttonText = selectedDisc
     ? `${selectedDisc.name} - ${selectedDisc.type}`
     : 'Disc Actions';
 
+  // ────────────────────────────────────────────────
+  // Handler for saving the throw (placeholder)
+  // Replace alert with real save logic later (API, localStorage, context, etc.)
+  const handleSaveThrow = () => {
+    if (!trackerDistance || !elapsedTime) return;
+
+    const throwData = {
+      disc: selectedDisc ? `${selectedDisc.name} (${selectedDisc.type})` : 'Unknown disc',
+      distance: trackerDistance,
+      time: elapsedTime.toFixed(2),
+      velocity: (trackerDistance / elapsedTime).toFixed(1),
+      timestamp: new Date().toISOString(),
+    };
+
+    alert(
+      `Throw saved!\n\n` +
+      `Disc: ${throwData.disc}\n` +
+      `Distance: ${throwData.distance} ft\n` +
+      `Time: ${throwData.time} s\n` +
+      `Avg Velocity: ${throwData.velocity} ft/s\n` +
+      `Time: ${new Date(throwData.timestamp).toLocaleString()}`
+    );
+
+    // TODO: Replace alert with real save:
+    // - send to API: await fetch('/api/throws', { method: 'POST', body: JSON.stringify(throwData) })
+    // - update local state / context
+    // - maybe reset stopwatch / results after save?
+  };
+
   return (
-    <div className="relative w-full max-w-md mx-auto">
+    <div className="relative w-full max-w-md mx-auto space-y-8">
       {/* Main button */}
       <button
         type="button"
@@ -110,20 +190,7 @@ export default function DiscActionsDropdown({
         </svg>
       </button>
 
-      {/* Tracker display – larger spacing top/bottom */}
-      {syncStatus === 'success' && trackerDistance !== null && (
-        <div className="mt-10 mb-12 flex flex-col items-center">
-          <div className="relative w-[75%] aspect-square max-w-45 rounded-full bg-[#764d9f] flex items-center justify-center shadow-2xl ring-2 ring-[#764d9f]/30">
-            <span className="text-5xl md:text-6xl font-extrabold text-white tracking-tight">
-              {trackerDistance}
-            </span>
-          </div>
-          <p className="mt-3 text-white/90 text-base md:text-lg font-medium">
-            ft
-          </p>
-        </div>
-      )}
-
+      {/* Disc Selector & Menu – always above tracker */}
       {isOpen && (
         <>
           <div className="fixed inset-0 z-10" onClick={closeDropdown} aria-hidden="true" />
@@ -241,6 +308,256 @@ export default function DiscActionsDropdown({
             </div>
           </div>
         </>
+      )}
+
+      {/* Tracker display – always below the dropdown (menu or button) */}
+      {syncStatus === 'success' && trackerDistance !== null && (
+        <div className="mt-10 mb-12 flex flex-col items-center">
+          <div className="relative w-[75%] aspect-square max-w-45 rounded-full bg-[#764d9f] flex items-center justify-center shadow-2xl ring-2 ring-[#764d9f]/30">
+            <span className="text-5xl md:text-6xl font-extrabold text-white tracking-tight">
+              {trackerDistance}
+            </span>
+          </div>
+          <p className="mt-3 text-white/90 text-base md:text-lg font-medium">
+            ft
+          </p>
+        </div>
+      )}
+
+      {/* Stopwatch & Throw Results */}
+      {syncStatus === 'success' && trackerDistance !== null && (
+        <div className="mt-8 w-full max-w-md mx-auto space-y-6 px-4">
+          {/* Stopwatch */}
+          <div className="bg-[#190f2A]/80 backdrop-blur border border-[#456fb6]/40 rounded-xl p-5 shadow-lg">
+            <div className="text-center mb-4">
+              <div className="text-4xl md:text-5xl font-mono font-bold text-[#54c4c3] tracking-tight">
+                {elapsedTime.toFixed(2)} <span className="text-xl text-white/70">s</span>
+              </div>
+              <p className="text-sm text-white/60 mt-1">Time of Flight</p>
+            </div>
+
+            <div className="flex justify-center gap-4">
+              {!isRunning ? (
+                <button
+                  onClick={startStopwatch}
+                  className="flex-1 bg-[#54c4c3] text-black font-medium py-3 px-6 rounded-lg hover:bg-[#3daaa9] transition touch-manipulation"
+                  disabled={elapsedTime > 0 && !showThrowResults}
+                >
+                  Start
+                </button>
+              ) : (
+                <button
+                  onClick={stopStopwatch}
+                  className="flex-1 bg-red-600 text-white font-medium py-3 px-6 rounded-lg hover:bg-red-700 transition touch-manipulation"
+                >
+                  Stop
+                </button>
+              )}
+
+              <button
+                onClick={resetStopwatch}
+                className="flex-1 bg-gray-700 text-white py-3 px-6 rounded-lg hover:bg-gray-600 transition touch-manipulation"
+                disabled={elapsedTime === 0}
+              >
+                Reset
+              </button>
+            </div>
+          </div>
+
+          {/* Throw Results */}
+          {showThrowResults && (
+            <div className="space-y-6">
+              <h3 className="text-xl font-semibold text-white text-center">
+                Throw Results
+              </h3>
+
+              {/* Flight Path Chart – distance (y) vs left/right (x) */}
+              <div className="bg-[#190f2A]/80 backdrop-blur border border-[#456fb6]/40 rounded-xl p-4 shadow-lg h-80">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart
+                    data={(() => {
+                      const points = [];
+                      const totalDistance = trackerDistance;
+                      const maxHeight = 40; // fake max height in feet for visualization
+                      const steps = 40;     // more points for smoother curve
+
+                      // 32 interpolated points based on your provided waypoints
+                      const deviationPoints = [
+                        { progress: 0.000, deviation: 0.00 },
+                        { progress: 0.032, deviation: 1.28 },
+                        { progress: 0.065, deviation: 2.56 },
+                        { progress: 0.097, deviation: 3.84 },
+                        { progress: 0.129, deviation: 5.12 },
+                        { progress: 0.161, deviation: 6.40 },
+                        { progress: 0.194, deviation: 7.68 },
+                        { progress: 0.226, deviation: 8.96 },
+                        { progress: 0.258, deviation: 10.00 },
+                        { progress: 0.290, deviation: 11.60 },
+                        { progress: 0.323, deviation: 13.60 },
+                        { progress: 0.355, deviation: 15.60 },
+                        { progress: 0.387, deviation: 17.60 },
+                        { progress: 0.419, deviation: 19.20 },
+                        { progress: 0.452, deviation: 20.00 },
+                        { progress: 0.484, deviation: 21.60 },
+                        { progress: 0.516, deviation: 24.00 },
+                        { progress: 0.548, deviation: 26.40 },
+                        { progress: 0.581, deviation: 28.40 },
+                        { progress: 0.613, deviation: 29.60 },
+                        { progress: 0.645, deviation: 30.00 },
+                        { progress: 0.677, deviation: 29.60 },
+                        { progress: 0.710, deviation: 28.80 },
+                        { progress: 0.742, deviation: 27.60 },
+                        { progress: 0.774, deviation: 26.40 },
+                        { progress: 0.806, deviation: 25.60 },
+                        { progress: 0.839, deviation: 25.20 },
+                        { progress: 0.871, deviation: 22.80 },
+                        { progress: 0.903, deviation: 20.40 },
+                        { progress: 0.935, deviation: 18.00 },
+                        { progress: 0.968, deviation: 16.20 },
+                        { progress: 1.000, deviation: 15.00 },
+                      ];
+
+                      // Helper: linear interpolation between the 32 points
+                      const getDeviation = (progress: number) => {
+                        for (let j = 0; j < deviationPoints.length - 1; j++) {
+                          const curr = deviationPoints[j];
+                          const next = deviationPoints[j + 1];
+                          if (progress >= curr.progress && progress <= next.progress) {
+                            const t = (progress - curr.progress) / (next.progress - curr.progress);
+                            return curr.deviation + t * (next.deviation - curr.deviation);
+                          }
+                        }
+                        // Fallback to last point
+                        return deviationPoints[deviationPoints.length - 1].deviation;
+                      };
+
+                      for (let i = 0; i <= steps; i++) {
+                        const progress = i / steps;
+                        const distanceTraveled = progress * totalDistance;
+
+                        // Simple parabolic height simulation
+                        const height = maxHeight * 4 * progress * (1 - progress);
+
+                        // Deviation from interpolated points
+                        const deviation = getDeviation(progress);
+
+                        points.push({
+                          distance: distanceTraveled,
+                          deviation,
+                          height,
+                        });
+                      }
+                      return points;
+                    })()}
+                    margin={{ top: 20, right: 20, left: 10, bottom: 40 }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" stroke="#456fb6/30" />
+                    <XAxis
+                      dataKey="deviation"
+                      type="number"
+                      domain={['dataMin - 20', 'dataMax + 20']}
+                      stroke="#aaa"
+                      tick={{ fill: '#ccc', fontSize: 12 }}
+                      ticks={[-100, -50, 0, 50, 100]}
+                      tickFormatter={(val) => (val === 0 ? 'center' : val > 0 ? `${val}` : `${val}`)}
+                      label={{
+                        value: '<- left          center          right ->',
+                        position: 'insideBottom',
+                        offset: -10,
+                        fill: '#ccc',
+                        style: { fontSize: 13 },
+                      }}
+                    />
+                    <YAxis
+                      dataKey="distance"
+                      stroke="#aaa"
+                      tick={{ fill: '#ccc', fontSize: 12 }}
+                      label={{
+                        value: 'Distance (ft)',
+                        angle: -90,
+                        position: 'insideLeft',
+                        fill: '#ccc',
+                        offset: -5,
+                      }}
+                    />
+                    <Tooltip
+                      contentStyle={{
+                        background: '#223066',
+                        border: '1px solid #54c4c3',
+                        color: 'white',
+                      }}
+                      formatter={(value: any, name?: string) => {
+                        if (typeof value !== 'number' || Number.isNaN(value)) {
+                          return '';
+                        }
+
+                        if (name === 'distance') {
+                          return `${Math.round(value)} ft`;
+                        }
+
+                        return value.toFixed(1);
+                      }}
+                      labelFormatter={(label: any) => {
+                        const num = Number(label);
+                        if (Number.isNaN(num)) {
+                          return '';
+                        }
+
+                        return num === 0
+                          ? 'Center'
+                          : num > 0
+                          ? `${num.toFixed(0)} ft right`
+                          : `${Math.abs(num).toFixed(0)} ft left`;
+                      }}
+                    />
+                    <Line
+                      type="monotone"
+                      dataKey="distance"
+                      stroke="#54c4c3"
+                      strokeWidth={4}
+                      dot={false}
+                      activeDot={{ r: 8 }}
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+
+              {/* Metrics */}
+              <div className="grid grid-cols-3 gap-4 text-center">
+                <div className="bg-[#223066]/60 rounded-lg p-4 border border-[#764d9f]/30">
+                  <div className="text-2xl font-bold text-[#54c4c3]">
+                    {elapsedTime.toFixed(2)}
+                  </div>
+                  <div className="text-xs text-white/70 mt-1">Time (s)</div>
+                </div>
+
+                <div className="bg-[#223066]/60 rounded-lg p-4 border border-[#764d9f]/30">
+                  <div className="text-2xl font-bold text-[#54c4c3]">
+                    {trackerDistance}
+                  </div>
+                  <div className="text-xs text-white/70 mt-1">Distance (ft)</div>
+                </div>
+
+                <div className="bg-[#223066]/60 rounded-lg p-4 border border-[#764d9f]/30">
+                  <div className="text-2xl font-bold text-[#54c4c3]">
+                    {(trackerDistance / elapsedTime).toFixed(1)}
+                  </div>
+                  <div className="text-xs text-white/70 mt-1">Avg Velocity (ft/s)</div>
+                </div>
+              </div>
+
+              {/*  Save throw button – appears after results are shown */}
+              <div className="flex justify-center">
+                <button
+                  onClick={handleSaveThrow}
+                  className="bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-8 rounded-xl transition shadow-md focus:outline-none focus:ring-2 focus:ring-green-500/50 touch-manipulation"
+                >
+                  Add Throw to Records
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
       )}
 
       {/* Remove Confirmation Popup */}

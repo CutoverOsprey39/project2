@@ -32,43 +32,20 @@ export default function DashboardHome() {
             </div>
 
             {/* Quick links – separate row below */}
-            <div className="flex flex-wrap justify-center gap-6">
-              <Link
-                href="/bag"
-                className="border border-[#456fb6] text-white font-medium px-8 py-3.5 rounded-lg hover:border-[#54c4c3] hover:text-[#54c4c3] transition"
-              >
-                View My Bag
-              </Link>
-
-              <Link
-                href="/stats"
-                className="border border-[#764d9f]/60 text-white/90 font-medium px-8 py-3.5 rounded-lg hover:border-[#54c4c3]/70 transition"
-              >
-                Stats Overview
-              </Link>
+            <div className="flex justify-center my-10">
+              <div className="flex justify-center my-10">
+                <Link
+                  href="/stats"
+                  className="w-full max-w-md mx-auto inline-flex items-center justify-center px-10 py-4 text-lg font-medium text-white bg-linear-to-r from-[#456fb6] to-[#764d9f] rounded-xl hover:from-[#54c4c3] hover:to-[#456fb6] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#54c4c3]/50 min-w-55 text-center"
+                >
+                  User Throw Statistics
+                </Link>
+              </div>
             </div>
           </div>
         </section>
 
         {/* Quick stats or recent activity cards */}
-        <section className="py-12 px-5 sm:px-8 md:px-12 lg:px-20">
-          <div className="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="bg-[#223066]/50 backdrop-blur-sm border border-[#764d9f]/30 rounded-xl p-6 hover:border-[#54c4c3]/50 transition">
-              <h3 className="text-xl font-semibold mb-2 text-[#54c4c3]">Latest Throw</h3>
-              <p className="text-white/80">285 ft • Turnover Fade • Star Destroyer</p>
-            </div>
-
-            <div className="bg-[#223066]/50 backdrop-blur-sm border border-[#764d9f]/30 rounded-xl p-6 hover:border-[#54c4c3]/50 transition">
-              <h3 className="text-xl font-semibold mb-2 text-[#54c4c3]">Bag Size</h3>
-              <p className="text-white/80">14 discs • 3 drivers, 5 mids, 6 putters</p>
-            </div>
-
-            <div className="bg-[#223066]/50 backdrop-blur-sm border border-[#764d9f]/30 rounded-xl p-6 hover:border-[#54c4c3]/50 transition">
-              <h3 className="text-xl font-semibold mb-2 text-[#54c4c3]">Accuracy</h3>
-              <p className="text-white/80">78% fairway hits • +4% this month</p>
-            </div>
-          </div>
-        </section>
 
         {/* More sections can go here */}
       </div>
