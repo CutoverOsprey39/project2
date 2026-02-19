@@ -36,7 +36,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight mb-6 text-white">
             Track Every Throw.<br />
-            Optimize Your <span className="text-[#54c4c3]">Game</span>.
+            Master Your <span className="text-[#54c4c3]">Game</span>.
           </h1>
 
           <p className="text-lg sm:text-xl md:text-2xl text-white/80 max-w-3xl mx-auto mb-10">

@@ -1,0 +1,1 @@
+//might not be neccesary but I tend to keep all constants in one file for managing them easier
