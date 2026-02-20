@@ -16,7 +16,7 @@ export default function Header() {
         <div className="hidden md:flex items-center justify-between w-full">
           <Link href="/" className="flex-none">
             <img
-              src="/flight IQ logo.svg"
+              src="/flight-iq-logo.svg"
               alt="Flight IQ logo"
               className="h-12 md:h-10 w-auto transition-transform hover:scale-105"
             />
@@ -40,7 +40,7 @@ export default function Header() {
             </Link>
 
             <Link
-              href="/sign-up"
+              href="/create-account"
               className="bg-[#54c4c3] text-black px-5 py-2.5 rounded-full text-sm font-medium hover:bg-[#3daaa9] transition-colors shadow-md"
             >
               Get Started
@@ -53,7 +53,7 @@ export default function Header() {
           {/* Centered logo */}
           <Link href="/" className="absolute left-1/2 -translate-x-1/2 z-10">
             <img
-              src="/flight IQ logo.svg"
+              src="/flight-iq-logo.svg"
               alt="Flight IQ logo"
               className="h-11 w-auto max-w-45 transition-transform hover:scale-105"
             />
@@ -118,7 +118,7 @@ export default function Header() {
             </Link>
 
             <Link
-              href="/sign-up"
+              href="/create-account"
               className="mt-5 bg-[#54c4c3] text-black px-6 py-4 rounded-full text-center font-semibold hover:bg-[#3daaa9] transition-colors shadow-md"
               onClick={closeMenu}
             >
