@@ -4,7 +4,7 @@ import { db } from "@/database/drizzle";
 import { usersTable } from "@/database/schema";
 import { eq } from "drizzle-orm";
 import bcrypt from "bcryptjs";
-import { signIn } from "@/auth";
+import { signIn, signOut } from "@/auth";
 import { AuthError } from "next-auth";
 import { signupSchema, signinSchema } from "@/lib/validations";
 // Import z from zod might be needed if implicit types used, but schemas are imported.
@@ -139,3 +139,7 @@ export const signUp = async (params: any) => {
     return { success: false, error: "Signup error" };
   }
 };
+
+  export const signOutUser = async () => {
+    await signOut();
+ }

@@ -1,7 +1,8 @@
 'use client';
 
+import { LogOut } from 'lucide-react';
+import { signOut } from 'next-auth/react';
 import Link from 'next/link';
-import { useState } from 'react';
 
 export default function DashboardHeader() {
   return (
@@ -10,7 +11,7 @@ export default function DashboardHeader() {
         {/* Logo – left on md+, centered on mobile */}
         <Link href="/dashboard" className="flex items-center">
           <img
-            src="/flight IQ logo.svg"
+            src="/flight-iq-logo.svg"
             alt="Flight IQ logo"
             className="h-9 md:h-10 w-auto transition-transform hover:scale-105"
           />
@@ -19,8 +20,10 @@ export default function DashboardHeader() {
         {/* Right side: Logout button + Settings */}
         <div className="flex items-center gap-4 md:gap-6">
           {/* Logout button – now a proper rounded button */}
-          <Link
-            href="/sign-in" // ← change to your actual logout route if different
+          <button
+            onClick={async () => {
+              await signOut({ callbackUrl: '/sign-in' });
+            }}
             className="
               px-4 py-2 
               text-white/90 text-sm md:text-base font-medium
@@ -30,10 +33,12 @@ export default function DashboardHeader() {
               transition-all duration-200
               hover:text-[#54c4c3] hover:shadow-sm
               focus:outline-none focus:ring-2 focus:ring-[#54c4c3]/40
-            "
+              cursor-pointer flex items-center
+            " 
           >
+            <LogOut className="w-5 h-5 inline-block mr-1 -mt-0.5" />
             Logout
-          </Link>
+          </button>
 
           {/* Settings icon */}
           <Link
