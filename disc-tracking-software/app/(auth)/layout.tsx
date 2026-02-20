@@ -13,7 +13,7 @@ export default function AuthLayout({
       </Link>
 
       <Link href="/" className="relative flex-none mb-8">
-        <img src="/flight IQ logo.svg" alt="Flight IQ logo" className="h-15 md:h-10 w-auto transition-transform hover:scale-105 py-0.2"/>
+        <img src="/flight-iq-logo.svg" alt="Flight IQ logo" className="h-15 md:h-10 w-auto transition-transform hover:scale-105 py-0.2"/>
       </Link>
 
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(84,196,195,0.08),transparent_50%)] pointer-events-none" />
