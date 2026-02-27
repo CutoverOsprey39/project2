@@ -2,6 +2,9 @@
   "name": "disc-tracking-software",
   "version": "0.1.0",
   "private": true,
+  "overrides": {
+    "vulnerable-package": ">=version-with-fix"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -37,8 +40,8 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "babel-plugin-react-compiler": "^1.0.0",
-    "drizzle-kit": "^0.18.1",
-    "eslint": "^10.0.2",
+    "drizzle-kit": "^0.31.9",
+    "eslint": "^9.0.0",
     "eslint-config-next": "^16.1.6",
     "tailwindcss": "^4",
     "typescript": "5.9.3"
