@@ -20,7 +20,7 @@ export default function About() {
             </p>
 
             <p>
-              Our software uses advanced tracking and analysis to give you clear insights into every throw — helping you understand your technique, identify patterns, and make smarter decisions on the course.
+              Our software uses advanced tracking and analysis to give you clear insights into every throw, helping you not only understand your technique but also identify patterns and make smarter decisions on the course.
             </p>
 
             <p>

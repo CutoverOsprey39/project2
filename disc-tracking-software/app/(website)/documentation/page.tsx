@@ -4,11 +4,11 @@ import Link from 'next/link';
 
 export default function UserDocs() {
   return (
-    <div className="min-h-screen bg-[#0f172a] text-white/90">
+    <div className="pt-20 md:pt-24 min-h-screen bg-[#190f2A] text-white">
       {/* Optional: Add your DashboardHeader here if you want it on docs page */}
       {/* <DashboardHeader /> */}
 
-      <main className="mx-auto px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20 py-20 md:py-24 lg:py-28 mt-8 md:mt-12 lg:mt-16">
+      <main className="text-center px-6 md:px-12 lg:px-20 py-10 md:py-16">
         {/* Page Title */}
         <h1 className="text-4xl md:text-5xl font-bold text-[#54c4c3] mb-12 tracking-tight text-center">
           User Documentation
@@ -31,8 +31,8 @@ export default function UserDocs() {
                 We improved readability compared to the original prototype by:
               </p>
               <ul className="list-disc pl-6 space-y-3">
-                <li>Using the clean, modern <strong>Inter</strong> sans-serif typeface (loaded via Google Fonts - free for commercial use).</li>
-                <li>Carefully selecting a dark color palette that ensures strong contrast.</li>
+                Using the clean, modern <strong>Inter</strong> sans-serif typeface (loaded via Google Fonts - free for commercial use).
+                Carefully selecting a dark color palette that ensures strong contrast.
               </ul>
 
               <p>
@@ -83,8 +83,8 @@ export default function UserDocs() {
                   Use the navigation at the top of the page to either:
                 </p>
                 <ul className="list-disc pl-6 space-y-2 mt-3">
-                  <li>Sign in with your existing account, or</li>
-                  <li>Create a new account</li>
+                  Sign in with your existing account, or
+                  Create a new account
                 </ul>
               </div>
 
@@ -97,9 +97,9 @@ export default function UserDocs() {
                   Once logged in:
                 </p>
                 <ul className="list-disc pl-6 space-y-3 mt-3">
-                  <li>Open the <strong>Disc Actions</strong> dropdown.</li>
-                  <li>Add a new tracked disc by entering its credentials.</li>
-                  <li>After adding, you can <strong>sync</strong> the tracker, <strong>switch</strong> between discs in your profile, or <strong>remove</strong> a disc if needed.</li>
+                  Open the <strong>Disc Actions</strong> dropdown.
+                  Add a new tracked disc by entering its credentials.
+                  After adding, you can <strong>sync</strong> the tracker, <strong>switch</strong> between discs in your profile, or <strong>remove</strong> a disc if needed.
                 </ul>
               </div>
 
@@ -112,8 +112,8 @@ export default function UserDocs() {
                   With a disc selected and synced:
                 </p>
                 <ul className="list-disc pl-6 space-y-3 mt-3">
-                  <li>Use the live GPS distance preview to help locate your disc after a throw.</li>
-                  <li>Record throws using the built-in accelerometer data <strong>or</strong> manually time the flight (stopwatch mode configured in settings).</li>
+                  Use the live GPS distance preview to help locate your disc after a throw.
+                  Record throws using the built-in accelerometer data <strong>or</strong> manually time the flight (stopwatch mode configured in settings).
                 </ul>
               </div>
 
@@ -126,8 +126,8 @@ export default function UserDocs() {
                   After a throw, you’ll see:
                 </p>
                 <ul className="list-disc pl-6 space-y-3 mt-3">
-                  <li>A detailed flight path chart showing curvature, distance, and direction</li>
-                  <li>Key metrics: flight time, distance, average velocity</li>
+                  A detailed flight path chart showing curvature, distance, and direction
+                  Key metrics: flight time, distance, average velocity
                 </ul>
                 <p className="text-lg mt-4">
                   This data helps you understand disc behavior — perfect for choosing the right disc for long shots, hard right hooks, or windy conditions.
@@ -143,8 +143,8 @@ export default function UserDocs() {
                   Not every throw is perfect (trees happen!). After viewing results:
                 </p>
                 <ul className="list-disc pl-6 space-y-3 mt-3">
-                  <li>Click <strong>"Add Throw to Records"</strong> to save the throw to your statistics.</li>
-                  <li>Or reset the timer and try again if you don’t want to log it.</li>
+                  Click <strong>"Add Throw to Records"</strong> to save the throw to your statistics.
+                  Or reset the timer and try again if you don’t want to log it.
                 </ul>
               </div>
 
@@ -157,9 +157,9 @@ export default function UserDocs() {
                   Saved throws appear in the <strong>User Throw Statistics</strong> section, where you can:
                 </p>
                 <ul className="list-disc pl-6 space-y-3 mt-3">
-                  <li>Analyze patterns over time</li>
-                  <li>Compare different discs</li>
-                  <li>Identify which disc performs best in specific situations</li>
+                  Analyze patterns over time
+                  Compare different discs
+                  Identify which disc performs best in specific situations
                 </ul>
                 <p className="text-lg mt-4 italic">
                   Experiment freely — the more data you collect, the better your on-course decisions will become.
