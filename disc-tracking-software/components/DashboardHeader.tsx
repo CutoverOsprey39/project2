@@ -1,3 +1,4 @@
+// components/DashboardHeader.tsx
 'use client';
 
 import { useState } from 'react';
@@ -57,7 +58,6 @@ export default function DashboardHeader() {
         </div>
       </header>
 
-      {/* Settings Overlay – now styled like main content */}
       {isSettingsOpen && (
         <>
           <div
@@ -67,7 +67,7 @@ export default function DashboardHeader() {
 
           <div
             className={`
-              fixed top-0 right-0 h-full w-full sm:w-96 lg:w-105
+              fixed top-0 right-0 h-full w-full sm:w-96 lg:w-[420px]
               bg-[#190f2A]/95 backdrop-blur-lg border-l border-[#223066]/60
               shadow-2xl z-60
               transform transition-transform duration-300 ease-out
@@ -88,9 +88,9 @@ export default function DashboardHeader() {
               </button>
             </div>
 
-            {/* Content – card-like sections */}
+            {/* Content */}
             <div className="p-6 space-y-10 overflow-y-auto h-[calc(100vh-80px)]">
-              {/* Section: Distance Unit */}
+              {/* Distance Unit */}
               <div className="bg-[#223066]/40 backdrop-blur-sm border border-[#456fb6]/40 rounded-xl p-6">
                 <h3 className="text-lg font-semibold text-white mb-4">Distance Unit</h3>
                 <div className="flex gap-8">
@@ -119,7 +119,7 @@ export default function DashboardHeader() {
                 </div>
               </div>
 
-              {/* Section: Throw Timing Mode */}
+              {/* Throw Mode */}
               <div className="bg-[#223066]/40 backdrop-blur-sm border border-[#456fb6]/40 rounded-xl p-6">
                 <h3 className="text-lg font-semibold text-white mb-4">Throw Timing Mode</h3>
                 <div className="flex flex-col sm:flex-row gap-6">
@@ -148,7 +148,7 @@ export default function DashboardHeader() {
                 </div>
               </div>
 
-              {/* Section: Auto-Save */}
+              {/* Auto-Save */}
               <div className="bg-[#223066]/40 backdrop-blur-sm border border-[#456fb6]/40 rounded-xl p-6">
                 <h3 className="text-lg font-semibold text-white mb-4">Auto-Save Throws</h3>
                 <label className="flex items-center gap-4 cursor-pointer">
@@ -167,7 +167,7 @@ export default function DashboardHeader() {
                 </label>
               </div>
 
-              {/* Section: Throw Results Metrics */}
+              {/* Throw Results Metrics */}
               <div className="bg-[#223066]/40 backdrop-blur-sm border border-[#456fb6]/40 rounded-xl p-6">
                 <h3 className="text-lg font-semibold text-white mb-4">Throw Results Metrics</h3>
                 <p className="text-sm text-white/70 mb-5">
@@ -196,13 +196,13 @@ export default function DashboardHeader() {
                 </div>
               </div>
 
-              {/* Save button */}
-              <div className="pt-8">
+              {/* Save button – increased bottom margin */}
+              <div className="pt-8 pb-12"> {/* ← Added pb-12 for bottom spacing */}
                 <button
                   onClick={handleSave}
                   className="
                     w-full py-4 px-6
-                    bg-linear-to-r from-[#54c4c3] to-[#3daaa9]
+                    bg-gradient-to-r from-[#54c4c3] to-[#3daaa9]
                     hover:from-[#3daaa9] hover:to-[#54c4c3]
                     text-black font-medium text-lg
                     rounded-xl shadow-lg hover:shadow-xl
