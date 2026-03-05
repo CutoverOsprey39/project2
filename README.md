@@ -16,45 +16,65 @@ USER DOCS:
 * Colors will not cause conflict with readability. WEBAIM.org https://webaim.org/resources/contrastchecker/ verifies this.
 
 ACCESSING/USING THE APP:
+# How to Use Disc Tracking Software
 
-1. Visit the Website
-Go to: https://disc-tracking-software.vercel.app/
+Follow these steps to get started tracking your disc golf throws.
 
-2. Sign In or Create an Account
+### 1. Visit the Website
+Go to:  
+🌐 **https://disc-tracking-software.vercel.app/**
+
+### 2. Sign In or Create an Account
 Use the navigation at the top of the page to either:
 
-Sign in with your existing account, or
-Create a new account
-3. Add & Manage Tracked Discs
-Once logged in:
+- 🔑 **Sign in** with your existing account, or
+- 🆕 **Create a new account**
 
-Open the Disc Actions dropdown.
-Add a new tracked disc by entering its credentials.
-After adding, you can sync the tracker, switch between discs in your profile, or remove a disc if needed.
-4. Sync & Throw
+### 3. Add & Manage Tracked Discs
+Once logged in:
+- Name and start a session
+- Open the **Disc Actions** dropdown
+- Add a new tracked disc by entering its name and connection number
+- After adding, you can:
+  - Sync the tracker
+  - Switch between discs in your bag
+  - Remove a disc if needed
+
+### 4. Sync & Throw
 With a disc selected and synced:
 
-Use the live GPS distance preview to help locate your disc after a throw.
-Record throws using the built-in accelerometer data or manually time the flight (stopwatch mode configured in settings).
-5. View Throw Analysis
+- Use the **live GPS distance preview** to help locate your disc after a throw
+- Record throws using:
+  - Built-in **accelerometer** data (auto-detects flight), or
+  - **Manual stopwatch** mode (configurable in settings)
+
+### 5. View Throw Analysis
 After a throw, you’ll see:
 
-A detailed flight path chart showing curvature, distance, and direction
-Key metrics: flight time, distance, average velocity
+- 📊 A detailed **flight path chart** showing curvature, distance, and direction
+- Key metrics include but are not limited to:
+  - Flight time
+  - Distance
+  - Average velocity
+- All metrics can be changed for meters to feet and be selected to show when desired in the settings panel
+
 This data helps you understand disc behavior — perfect for choosing the right disc for long shots, hard right hooks, or windy conditions.
 
-6. Save or Discard Throw Data
+### 6. Save or Discard Throw Data
 Not every throw is perfect (trees happen!). After viewing results:
 
-Click "Add Throw to Records" to save the throw to your statistics.
-Or reset the timer and try again if you don’t want to log it.
-7. View Your Throw Statistics
-Saved throws appear in the User Throw Statistics section, where you can:
+- Click ** "Add Throw to Records"** to save the throw to your statistics, or
+- Reset the timer and try again if you don’t want to log it
+- Autosave is also available; users can delete their bad throws in the throw statistics page when desired
 
-Analyze patterns over time
-Compare different discs
-Identify which disc performs best in specific situations
-Experiment freely — the more data you collect, the better your on-course decisions will become.
+### 7. View Your Throw Statistics
+Saved throws appear in the **User Throw Statistics** section, where you can:
+
+- 📈 Analyze patterns in sessions over time
+- 🔍 Compare different discs
+- 🎯 Identify which disc performs best in specific situations
+
+**Experiment freely** — the more data from sessions you collect, the better your on-course decisions will become.
 
 
 
