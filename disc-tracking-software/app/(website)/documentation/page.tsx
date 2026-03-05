@@ -97,6 +97,7 @@ export default function UserDocs() {
                   Once logged in:
                 </p>
                 <ul className="list-disc pl-6 space-y-3 mt-3">
+                  <li>Name and start a session</li>
                   <li>Open the <strong>Disc Actions</strong> dropdown.</li>
                   <li>Add a new tracked disc by entering its credentials.</li>
                   <li>After adding, you can <strong>sync</strong> the tracker, <strong>switch</strong> between discs in your profile, or <strong>remove</strong> a disc if needed.</li>
@@ -143,7 +144,7 @@ export default function UserDocs() {
                   Not every throw is perfect (trees happen!). After viewing results:
                 </p>
                 <ul className="list-disc pl-6 space-y-3 mt-3">
-                  <li>Add a session by clicking the <strong>"Begin Session"</strong> button. You will then be prompted to add a name for the session. All of your data from your throws during this session will be added to this session data which is good for comparing the courses you play and optimal throws for pin layouts. </li>
+                  <li>All of your data from your throws during this session will be added to the session data which is good for comparing the courses you play and determining optimal throws for pin layouts. </li>
                   <li>Click <strong>"Add Throw to Records"</strong> to save the throw to your session statistics or use the autosave feature which can be enabled in the settings. </li>
                   <li>reset the timer and try again if you don't want to log the throw if autosave is disabled.</li>
                   <li>Ending a session is done when you click the <strong>"End Session"</strong> button. This will prompt you to confirm the action.</li>
@@ -160,7 +161,7 @@ export default function UserDocs() {
                   Saved throws appear in the <strong>User Throw Statistics</strong> section, where you can:
                 </p>
                 <ul className="list-disc pl-6 space-y-3 mt-3">
-                  <li>Analyze patterns over time</li>
+                  <li>Analyze patterns in sessions over time</li>
                   <li>Compare different discs</li>
                   <li>Identify which disc performs best in specific situations</li>
                 </ul>
