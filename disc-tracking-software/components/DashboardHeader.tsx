@@ -67,7 +67,7 @@ export default function DashboardHeader() {
 
           <div
             className={`
-              fixed top-0 right-0 h-full w-full sm:w-96 lg:w-[420px]
+              fixed top-0 right-0 h-full w-full sm:w-96 lg:w-105
               bg-[#190f2A]/95 backdrop-blur-lg border-l border-[#223066]/60
               shadow-2xl z-60
               transform transition-transform duration-300 ease-out
@@ -202,7 +202,7 @@ export default function DashboardHeader() {
                   onClick={handleSave}
                   className="
                     w-full py-4 px-6
-                    bg-gradient-to-r from-[#54c4c3] to-[#3daaa9]
+                    bg-linear-to-r from-[#54c4c3] to-[#3daaa9]
                     hover:from-[#3daaa9] hover:to-[#54c4c3]
                     text-black font-medium text-lg
                     rounded-xl shadow-lg hover:shadow-xl
