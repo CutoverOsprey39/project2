@@ -56,7 +56,7 @@ After a throw, you’ll see:
   - Flight time
   - Distance
   - Average velocity
-- All metrics can be changed for meters to feet and be selected to show when desired in the settings panel
+- Metrics can be changed to meters or feet, and can be chosen to be visible in the settings panel when desired
 
 This data helps you understand disc behavior — perfect for choosing the right disc for long shots, hard right hooks, or windy conditions.
 
